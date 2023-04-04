@@ -17,12 +17,23 @@ interface ButtonProps {
     isDisabled?: boolean
 }
 
-function Button({ size = 'md', variant = 'solid', isDisabled }: ButtonProps) {
+function Button({
+    children,
+    isDisabled,
+    size = 'md',
+    variant = 'solid',
+}: ButtonProps) {
     if (variant === 'outline') {
+        return (
+            <OutLineButton size={size} disabled={isDisabled}>
+                {children}
+            </OutLineButton>
+        )
     }
+
     return (
         <SolidButton size={size} disabled={isDisabled}>
-            SolidButton
+            {children}
         </SolidButton>
     )
 }
@@ -48,8 +59,27 @@ const SolidButton = styled(ButtonStyled)`
     }
 
     &:disabled {
-        background-color: rgba(255, 94, 91, 0.5);
-        border: none;
+        opacity: 0.5;
+        cursor: not-allowed;
     }
 `
+
+const OutLineButton = styled(ButtonStyled)`
+    background-color: transparent;
+    border: 1px solid ${({ theme }) => theme.colors.primary[200]};
+    color: ${({ theme }) => theme.colors.primary[200]};
+
+    &:hover {
+        background-color: rgba(243, 85, 82, 0.1);
+    }
+    &:active {
+        background-color: rgba(243, 85, 82, 0.15);
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
 `
+
+export default Button
