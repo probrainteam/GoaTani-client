@@ -12,6 +12,7 @@ const ButtonSize: Record<ButtonSizeType, string> = {
 interface ButtonProps {
     children: React.ReactNode
 
+    onClick?: () => void
     size?: ButtonSizeType
     variant?: 'solid' | 'outline'
     isDisabled?: boolean
@@ -19,20 +20,21 @@ interface ButtonProps {
 
 function Button({
     children,
+    onClick,
     isDisabled,
     size = 'md',
     variant = 'solid',
 }: ButtonProps) {
     if (variant === 'outline') {
         return (
-            <OutLineButton size={size} disabled={isDisabled}>
+            <OutLineButton size={size} disabled={isDisabled} onClick={onClick}>
                 {children}
             </OutLineButton>
         )
     }
 
     return (
-        <SolidButton size={size} disabled={isDisabled}>
+        <SolidButton size={size} disabled={isDisabled} onClick={onClick}>
             {children}
         </SolidButton>
     )
