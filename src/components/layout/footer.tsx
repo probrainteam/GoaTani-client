@@ -1,20 +1,19 @@
-import Image from 'next/image'
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
 function Header() {
-    return <Wrapper>team probrain</Wrapper>
+  return <Wrapper>team probrain</Wrapper>;
 }
 
 const Wrapper = styled.footer`
-    background-color: ${({ theme }) => theme.colors.primary[100]};
-    height: 59px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0px 18px;
+  background-color: ${({ theme }) => theme.colors.primary[100]};
+  height: 59px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 18px;
 
-    color: ${({ theme }) => theme.colors.white};
-`
+  color: ${({ theme }) => theme.colors.white};
+`;
 
-export default Header
+export default Header;
