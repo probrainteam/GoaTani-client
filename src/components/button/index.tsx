@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 type ButtonSizeType = 'lg' | 'md' | 'sm' | 'xs'
 
-const ButtonSize: Record<ButtonSizeType, string> = {
+const buttonSize: Record<ButtonSizeType, string> = {
     lg: '60px',
     md: '50px',
     sm: '40px',
@@ -42,7 +42,7 @@ function Button({
 
 const ButtonStyled = styled.button<{ size: ButtonSizeType }>`
     width: 100%;
-    height: ${({ size }) => ButtonSize[size]};
+    height: ${({ size }) => buttonSize[size]};
 
     border-radius: 10px;
 `
