@@ -8,7 +8,7 @@ type IconButtonVariant = 'solid' | 'outline';
 type IconButtonColorScheme = 'primary';
 type IconButtonSizeType = ButtonSizeType;
 
-interface IIcon extends ButtonProps {
+interface IconButtonProps extends ButtonProps {
   name: IconName;
   variant?: IconButtonVariant;
   colorScheme?: IconButtonColorScheme;
@@ -22,7 +22,7 @@ const iconSize = {
   xs: 16,
 };
 
-const IconButtonCore = forwardRef<HTMLButtonElement, IIcon>((props, ref) => {
+const IconButtonCore = forwardRef<HTMLButtonElement, IconButtonProps>((props, ref) => {
   const { name, size = 'md', onClick, ...rest } = props;
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
