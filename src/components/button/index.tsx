@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-type ButtonSizeType = 'lg' | 'md' | 'sm' | 'xs';
+export type ButtonSizeType = 'lg' | 'md' | 'sm' | 'xs';
 
 const buttonSize: Record<ButtonSizeType, string> = {
   lg: '60px',
