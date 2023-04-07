@@ -1,20 +1,24 @@
 import MandalartItem, { MANDALART_ITEM_SIZE } from '@/components/mandalart/item';
 import { MANDALART_THEME } from '@/constants/mandalart-theme';
 import { MandalartThemeType, MandalartType } from '@/types/mandalart';
+import { getFilledSubContents } from '@/utils/mandalart';
 import { Fragment } from 'react';
 import styled from 'styled-components';
 
 interface MandalartProps extends MandalartType {
   theme: MandalartThemeType;
 }
+
 function Mandalart({ mainContent, subContents, theme }: MandalartProps) {
+  const fillSubContents = getFilledSubContents(subContents);
+
   const handleManageMandalartClick = (id: number) => {
     console.log('handleManageMandalartClick: ', id);
   };
 
   return (
     <Wrapper bg={MANDALART_THEME[theme].bg}>
-      {subContents.map((subContent, idx) => {
+      {fillSubContents.map((subContent, idx) => {
         if (idx === 4) {
           return (
             <Fragment key={mainContent.id}>

@@ -1,52 +1,37 @@
 'use client';
 
 import Mandalart from '@/components/mandalart';
-import { MandalartType } from '@/types/mandalart';
+import { MandalartItemType } from '@/types/mandalart';
+import { useState } from 'react';
 
-const DUMMY_DATA: MandalartType = {
+const DUMMY_DATA = {
   mainContent: {
-    id: 1,
+    id: 0,
     content: 'Key Objective',
   },
-  subContents: [
-    {
-      id: 2,
-      content: 'Sub Objective 1',
-    },
-    {
-      id: 3,
-      content: 'Sub Objective 1',
-    },
-    {
-      id: 4,
-      content: 'Sub Objective 1',
-    },
-    {
-      id: 5,
-      content: 'Sub Objective 1',
-    },
-    {
-      id: 6,
-      content: 'Sub Objective 1',
-    },
-    {
-      id: 7,
-      content: 'Sub Objective 1',
-    },
-    {
-      id: 8,
-      content: 'Sub Objective 1',
-    },
-    {
-      id: 9,
-      content: 'Sub Objective 1',
-    },
-  ],
 };
+
 function KeyObjectivePage() {
+  const [subContents, setSubContents] = useState<MandalartItemType[]>([]);
+  const [input, setInput] = useState('');
+
+  const handleAddSubContent = () => {
+    if (input === '') return;
+
+    const newSubContent = {
+      id: subContents.length + 1,
+      content: input,
+    };
+
+    setSubContents([...subContents, newSubContent]);
+    setInput('');
+  };
+
   return (
     <div>
-      <Mandalart mainContent={DUMMY_DATA.mainContent} subContents={DUMMY_DATA.subContents} theme={'secondary'} />
+      <Mandalart mainContent={DUMMY_DATA.mainContent} subContents={subContents} theme={'secondary'} />
+      <input type='text' value={input} onChange={(e) => setInput(e.target.value)} />
+      <button onClick={handleAddSubContent}>추가</button>
     </div>
   );
 }
