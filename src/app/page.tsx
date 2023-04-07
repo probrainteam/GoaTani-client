@@ -17,8 +17,10 @@ export default function Home() {
       <Flex gap={20} direction='column'>
         <Flex direction='column' gap={5} isFull>
           <Button>button</Button>
-          <Button isDisabled>button</Button>
+          <Button disabled>button</Button>
           <Button variant='outline'>button</Button>
+          <Button colorScheme='lighten'>button</Button>
+          <Button colorScheme='darken'>button</Button>
         </Flex>
         <Flex gap={3}>
           <Badge onClick={onClick}>Badge</Badge>

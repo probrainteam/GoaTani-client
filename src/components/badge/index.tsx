@@ -5,7 +5,7 @@ type BadgeColorScheme = 'primary' | 'lighten' | 'darken';
 
 interface BadgeProps {
   children: React.ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
 
   colorScheme?: BadgeColorScheme;
 }
