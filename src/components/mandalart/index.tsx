@@ -1,19 +1,50 @@
 import MandalartItem, { MANDALART_ITEM_SIZE } from '@/components/mandalart/item';
-import theme from '@/styles/theme';
+import { MANDALART_THEME } from '@/constants/mandalart-theme';
 import { MandalartType } from '@/types/mandalart';
+import { Fragment } from 'react';
 import styled from 'styled-components';
 
-function Mandalart({ mainContent, subContents }: MandalartType) {
+interface MandalartProps extends MandalartType {
+  theme: 1;
+}
+function Mandalart({ mainContent, subContents, theme = 1 }: MandalartProps) {
+  const handleManageMandalartClick = (id: number) => {
+    console.log('handleManageMandalartClick: ', id);
+  };
+
   return (
-    <Wrapper bg={theme.colors.primary[100]}>
+    <Wrapper bg={MANDALART_THEME[theme].bg}>
       {subContents.map((subContent, idx) => {
-        if (idx > 3) return null;
-        return <MandalartItem key={subContent.id} id={subContent.id} content={subContent.content} />;
-      })}
-      <MandalartItem key={mainContent.id} id={mainContent.id} content={mainContent.content} />
-      {subContents.map((subContent, idx) => {
-        if (idx <= 3) return null;
-        return <MandalartItem key={subContent.id} id={subContent.id} content={subContent.content} />;
+        if (idx === 4) {
+          return (
+            <Fragment key={mainContent.id}>
+              <MandalartItem
+                bg={MANDALART_THEME[theme].mainBgColor}
+                color={MANDALART_THEME[theme].mainTextColor}
+                id={mainContent.id}
+                content={mainContent.content}
+              />
+              <MandalartItem
+                onClick={handleManageMandalartClick}
+                bg={MANDALART_THEME[theme].subBgColor}
+                color={MANDALART_THEME[theme].subTextColor}
+                key={subContent.id}
+                id={subContent.id}
+                content={subContent.content}
+              />
+            </Fragment>
+          );
+        }
+        return (
+          <MandalartItem
+            onClick={handleManageMandalartClick}
+            key={subContent.id}
+            bg={MANDALART_THEME[theme].subBgColor}
+            color={MANDALART_THEME[theme].subTextColor}
+            id={subContent.id}
+            content={subContent.content}
+          />
+        );
       })}
     </Wrapper>
   );

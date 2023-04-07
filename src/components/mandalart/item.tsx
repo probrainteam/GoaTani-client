@@ -3,11 +3,21 @@ import styled from 'styled-components';
 
 export const MANDALART_ITEM_SIZE = '90px';
 
-export function MandalartItem({ content, id }: MandalartItemType) {
-  return <Wrapper>{content}</Wrapper>;
+interface MandalartItemProps extends MandalartItemType {
+  color: string;
+  bg: string;
+  onClick?: (id: number) => void;
 }
 
-const Wrapper = styled.div`
+export function MandalartItem({ content, id, bg, color, onClick }: MandalartItemProps) {
+  return (
+    <Wrapper bg={bg} color={color} onClick={() => onClick && onClick(id)}>
+      {content}
+    </Wrapper>
+  );
+}
+
+const Wrapper = styled.div<{ bg: string; color: string }>`
   width: ${MANDALART_ITEM_SIZE};
   height: ${MANDALART_ITEM_SIZE};
 
@@ -17,8 +27,8 @@ const Wrapper = styled.div`
   align-items: center;
   text-align: center;
 
-  background-color: ${({ theme }) => theme.colors.lighten[100]};
-  color: ${({ theme }) => theme.colors.darken[100]};
+  background-color: ${({ bg }) => bg};
+  color: ${({ color }) => color};
 `;
 
 export default MandalartItem;
