@@ -6,6 +6,11 @@ export interface MandalartType {
   // subColor: string;
 }
 
+export interface MandalartTotalType {
+  mainContent: MandalartType;
+  subContents: MandalartType[];
+}
+
 export interface MandalartItemType {
   id: string;
   content: string;
