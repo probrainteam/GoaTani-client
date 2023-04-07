@@ -46,7 +46,7 @@ const DUMMY_DATA: MandalartType = {
 function KeyObjectivePage() {
   return (
     <div>
-      <Mandalart mainContent={DUMMY_DATA.mainContent} subContents={DUMMY_DATA.subContents} />
+      <Mandalart mainContent={DUMMY_DATA.mainContent} subContents={DUMMY_DATA.subContents} theme={'secondary'} />
     </div>
   );
 }

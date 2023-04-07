@@ -10,3 +10,12 @@ export interface MandalartItemType {
   id: number;
   content: string;
 }
+
+export type MandalartThemeType = 'primary' | 'secondary';
+export interface MandalartThemeItemType {
+  bg: string;
+  mainBgColor: string;
+  mainTextColor: string;
+  subBgColor: string;
+  subTextColor: string;
+}

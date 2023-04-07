@@ -1,13 +1,13 @@
 import MandalartItem, { MANDALART_ITEM_SIZE } from '@/components/mandalart/item';
 import { MANDALART_THEME } from '@/constants/mandalart-theme';
-import { MandalartType } from '@/types/mandalart';
+import { MandalartThemeType, MandalartType } from '@/types/mandalart';
 import { Fragment } from 'react';
 import styled from 'styled-components';
 
 interface MandalartProps extends MandalartType {
-  theme: 1;
+  theme: MandalartThemeType;
 }
-function Mandalart({ mainContent, subContents, theme = 1 }: MandalartProps) {
+function Mandalart({ mainContent, subContents, theme }: MandalartProps) {
   const handleManageMandalartClick = (id: number) => {
     console.log('handleManageMandalartClick: ', id);
   };
