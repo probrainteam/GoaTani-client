@@ -6,7 +6,7 @@ export const MANDALART_ITEM_SIZE = '90px';
 interface MandalartItemProps extends MandalartItemType {
   color: string;
   bg: string;
-  onClick?: (id: number) => void;
+  onClick?: (id: string) => void;
 }
 
 export function MandalartItem({ content, id, bg, color, onClick }: MandalartItemProps) {

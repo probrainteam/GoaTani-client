@@ -7,7 +7,7 @@ export interface MandalartType {
 }
 
 export interface MandalartItemType {
-  id: number;
+  id: string;
   content: string;
 }
 

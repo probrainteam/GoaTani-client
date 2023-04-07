@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 const DUMMY_DATA = {
   mainContent: {
-    id: 0,
+    id: '0',
     content: 'Key Objective',
   },
 };
@@ -19,7 +19,7 @@ function KeyObjectivePage() {
     if (input === '') return;
 
     const newSubContent = {
-      id: subContents.length + 1,
+      id: 'sub' + (subContents[subContents.length - 1].id + 1),
       content: input,
     };
 
@@ -27,9 +27,18 @@ function KeyObjectivePage() {
     setInput('');
   };
 
+  const handleRemoveSubContent = (id: string) => {
+    setSubContents(subContents.filter((subContent) => subContent.id !== id));
+  };
+
   return (
     <div>
-      <Mandalart mainContent={DUMMY_DATA.mainContent} subContents={subContents} theme={'secondary'} />
+      <Mandalart
+        mainContent={DUMMY_DATA.mainContent}
+        subContents={subContents}
+        theme={'secondary'}
+        handleItemDelete={handleRemoveSubContent}
+      />
       <input type='text' value={input} onChange={(e) => setInput(e.target.value)} />
       <button onClick={handleAddSubContent}>추가</button>
     </div>

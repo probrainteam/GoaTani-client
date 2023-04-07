@@ -7,14 +7,11 @@ import styled from 'styled-components';
 
 interface MandalartProps extends MandalartType {
   theme: MandalartThemeType;
+  handleItemDelete?: (id: string) => void;
 }
 
-function Mandalart({ mainContent, subContents, theme }: MandalartProps) {
+function Mandalart({ mainContent, subContents, theme, handleItemDelete }: MandalartProps) {
   const fillSubContents = getFilledSubContents(subContents);
-
-  const handleManageMandalartClick = (id: number) => {
-    console.log('handleManageMandalartClick: ', id);
-  };
 
   return (
     <Wrapper bg={MANDALART_THEME[theme].bg}>
@@ -22,6 +19,7 @@ function Mandalart({ mainContent, subContents, theme }: MandalartProps) {
         if (idx === 4) {
           return (
             <Fragment key={mainContent.id}>
+              {/* 어떻게 더 잘잘 할 방법이 있을까요? */}
               <MandalartItem
                 bg={MANDALART_THEME[theme].mainBgColor}
                 color={MANDALART_THEME[theme].mainTextColor}
@@ -29,24 +27,24 @@ function Mandalart({ mainContent, subContents, theme }: MandalartProps) {
                 content={mainContent.content}
               />
               <MandalartItem
-                onClick={handleManageMandalartClick}
                 bg={MANDALART_THEME[theme].subBgColor}
                 color={MANDALART_THEME[theme].subTextColor}
                 key={subContent.id}
                 id={subContent.id}
                 content={subContent.content}
+                onClick={handleItemDelete}
               />
             </Fragment>
           );
         }
         return (
           <MandalartItem
-            onClick={handleManageMandalartClick}
             key={subContent.id}
             bg={MANDALART_THEME[theme].subBgColor}
             color={MANDALART_THEME[theme].subTextColor}
             id={subContent.id}
             content={subContent.content}
+            onClick={handleItemDelete}
           />
         );
       })}
