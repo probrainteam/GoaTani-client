@@ -26,6 +26,7 @@ const Wrapper = styled.div<{ bg: string; color: string }>`
   display: flex;
   align-items: center;
   text-align: center;
+  justify-content: center;
 
   background-color: ${({ bg }) => bg};
   color: ${({ color }) => color};

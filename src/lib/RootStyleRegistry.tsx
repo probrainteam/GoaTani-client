@@ -32,6 +32,8 @@ const Wrapper = styled.div`
   margin: auto;
 
   border: 1px solid black;
+
+  height: 100%;
 `;
 
 const InnerWrapper = styled.div`
