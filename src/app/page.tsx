@@ -1,4 +1,5 @@
 'use client';
+import Badge from '@/components/badge';
 import Button from '@/components/button';
 import { Flex } from '@/components/flex';
 import { IconButton } from '@/components/icon-button';
@@ -9,6 +10,8 @@ import { VerticalDotsIcon } from '@/components/icon/vertical-dots-icon';
 // const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const onClick = () => console.log('click');
+
   return (
     <main>
       <Flex gap={20} direction='column'>
@@ -16,6 +19,15 @@ export default function Home() {
           <Button>button</Button>
           <Button isDisabled>button</Button>
           <Button variant='outline'>button</Button>
+        </Flex>
+        <Flex gap={3}>
+          <Badge onClick={onClick}>Badge</Badge>
+          <Badge colorScheme='lighten' onClick={onClick}>
+            Badge
+          </Badge>
+          <Badge colorScheme='darken' onClick={onClick}>
+            Badge
+          </Badge>
         </Flex>
 
         <Flex gap={3}>
