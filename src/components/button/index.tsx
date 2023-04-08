@@ -1,76 +1,77 @@
+import { ComponentProps, forwardRef } from 'react';
 import styled from 'styled-components';
 
 export type ButtonSizeType = 'lg' | 'md' | 'sm' | 'xs';
+type ButtonColorSchemeType = 'primary' | 'lighten' | 'darken';
+type ButtonVariantType = 'solid' | 'outline';
 
-const buttonSize: Record<ButtonSizeType, string> = {
-  lg: '60px',
-  md: '50px',
-  sm: '40px',
-  xs: '30px',
+const buttonSize: Record<ButtonSizeType, number> = {
+  lg: 60,
+  md: 50,
+  sm: 40,
+  xs: 30,
 };
 
-interface ButtonProps {
-  children: React.ReactNode;
-
-  onClick?: () => void;
+interface ButtonProps extends ComponentProps<'button'> {
   size?: ButtonSizeType;
-  variant?: 'solid' | 'outline';
-  isDisabled?: boolean;
+  variant?: ButtonVariantType;
+  colorScheme?: ButtonColorSchemeType;
 }
 
-function Button({ children, onClick, isDisabled, size = 'md', variant = 'solid' }: ButtonProps) {
-  if (variant === 'outline') {
-    return (
-      <OutLineButton size={size} disabled={isDisabled} onClick={onClick}>
-        {children}
-      </OutLineButton>
-    );
-  }
+const ButtonCore = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
+  const { children, onClick, ...rest } = props;
+
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!onClick) return;
+    e.stopPropagation();
+    onClick(e);
+  };
 
   return (
-    <SolidButton size={size} disabled={isDisabled} onClick={onClick}>
+    <button ref={ref} onClick={handleClick} {...rest}>
       {children}
-    </SolidButton>
+    </button>
   );
-}
+});
 
-const ButtonStyled = styled.button<{ size: ButtonSizeType }>`
+ButtonCore.displayName = 'ButtonCore';
+
+const Button = styled(ButtonCore)`
+  cursor: pointer;
   width: 100%;
-  height: ${({ size }) => buttonSize[size]};
-
+  height: ${({ size = 'md' }) => buttonSize[size]}px;
   border-radius: 10px;
-`;
 
-const SolidButton = styled(ButtonStyled)`
-  background-color: ${({ theme }) => theme.colors.primary[100]};
-  border: 1px solid ${({ theme }) => theme.colors.primary[100]};
-  color: ${({ theme }) => theme.colors.white};
+  ${({ variant, theme, colorScheme = 'primary' }) => {
+    if (variant === 'outline') {
+      return `
+        background-color: transparent;
+        border: 1px solid ${theme.colors[colorScheme][200]};
+        color: ${theme.colors[colorScheme][200]};
 
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.primary[200]};
-  }
+        &:hover {
+          background-color: ${theme.colors.lighten[100]};
+        }
+        &:active {
+          background-color: ${theme.colors.lighten[200]};
+        }
+      `;
+    }
 
-  &:active {
-    background-color: ${({ theme }) => theme.colors.primary[300]};
-  }
+    return `
+        background-color: ${theme.colors[colorScheme][100]};
+        border: 1px solid ${theme.colors[colorScheme][100]};
+        color: ${theme.colors.white};
 
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-`;
-
-const OutLineButton = styled(ButtonStyled)`
-  background-color: transparent;
-  border: 1px solid ${({ theme }) => theme.colors.primary[200]};
-  color: ${({ theme }) => theme.colors.primary[200]};
-
-  &:hover {
-    background-color: rgba(243, 85, 82, 0.1);
-  }
-  &:active {
-    background-color: rgba(243, 85, 82, 0.15);
-  }
+        &:hover {
+          background-color: ${theme.colors[colorScheme][200]};
+        }
+        
+        &:active {
+          background-color: ${theme.colors[colorScheme][300]};
+        }
+      `;
+  }};
 
   &:disabled {
     opacity: 0.5;

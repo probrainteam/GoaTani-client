@@ -36,4 +36,6 @@ const Wrapper = styled.div`
 
 const InnerWrapper = styled.div`
   min-height: 100vh;
+
+  background-color: #fff;
 `;
