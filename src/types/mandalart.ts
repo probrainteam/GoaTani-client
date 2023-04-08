@@ -1,12 +1,12 @@
-export interface MandalartType {
-  mainContent: MandalartItemType;
-  subContents: MandalartItemType[];
+export interface MandalartPartType {
+  mainContent: MandalartTileType;
+  subContents: MandalartTileType[];
 
   // mainColor: string; // 필요한가?
   // subColor: string;
 }
 
-export interface MandalartItemType {
+export interface MandalartTileType {
   id: string;
   content: string;
 }

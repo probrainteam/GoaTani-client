@@ -1,19 +1,19 @@
 'use client';
 
-import Mandalart from '@/components/mandalart';
-import { MandalartItemType } from '@/types/mandalart';
+import { MandalartPart } from '@/components/mandalart';
+import { MandalartTileType } from '@/types/mandalart';
 import { useState } from 'react';
 import styled from 'styled-components';
 
 const DUMMY_DATA = {
   mainContent: {
     id: '0',
-    content: 'Key Objective',
+    content: 'Key Goals',
   },
 };
 
-function KeyObjectivePage() {
-  const [subContents, setSubContents] = useState<MandalartItemType[]>([]);
+function KeyGoalsPage() {
+  const [subContents, setSubContents] = useState<MandalartTileType[]>([]);
   const [input, setInput] = useState('');
 
   const handleAddSubContent = () => {
@@ -40,7 +40,7 @@ function KeyObjectivePage() {
 
   return (
     <Wrapper>
-      <Mandalart
+      <MandalartPart
         mainContent={DUMMY_DATA.mainContent}
         subContents={subContents}
         theme={'secondary'}
@@ -61,4 +61,4 @@ const Wrapper = styled.div`
   gap: 20px;
 `;
 
-export default KeyObjectivePage;
+export default KeyGoalsPage;

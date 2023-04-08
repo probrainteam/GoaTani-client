@@ -1,15 +1,15 @@
-import { MandalartItemType } from '@/types/mandalart';
+import { MandalartTileType } from '@/types/mandalart';
 import styled from 'styled-components';
 
 export const MANDALART_ITEM_SIZE = '90px';
 
-interface MandalartItemProps extends MandalartItemType {
+interface MandalartTileProps extends MandalartTileType {
   color: string;
   bg: string;
   onClick?: (id: string) => void;
 }
 
-export function MandalartItem({ content, id, bg, color, onClick }: MandalartItemProps) {
+export function MandalartTile({ content, id, bg, color, onClick }: MandalartTileProps) {
   return (
     <Wrapper bg={bg} color={color} onClick={() => onClick && onClick(id)}>
       {content}
@@ -31,5 +31,3 @@ const Wrapper = styled.div<{ bg: string; color: string }>`
   background-color: ${({ bg }) => bg};
   color: ${({ color }) => color};
 `;
-
-export default MandalartItem;
