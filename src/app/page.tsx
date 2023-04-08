@@ -5,6 +5,7 @@ import { IconButton } from '@/components/icon-button';
 import { MessageIcon } from '@/components/icon/message-icon';
 import { ShareIcon } from '@/components/icon/share-icon';
 import { VerticalDotsIcon } from '@/components/icon/vertical-dots-icon';
+import { Input } from '@/components/input';
 
 // const inter = Inter({ subsets: ['latin'] })
 
@@ -48,6 +49,42 @@ export default function Home() {
             <IconButton name='message' size='lg' variant='solid' disabled />
             <IconButton name='message' size='lg' variant='outline' />
             <IconButton name='message' size='lg' variant='outline' disabled />
+          </Flex>
+        </Flex>
+
+        <Flex gap={10} direction='column' isFull padding={10}>
+          <Flex gap={5} direction='column' isFull>
+            <Input placeholder='placeholder' variant='outline' />
+            <Input placeholder='placeholder' variant='outline' inputSize='sm' />
+            <Input placeholder='placeholder' variant='outline' inputSize='md' />
+            <Input placeholder='placeholder' variant='outline' inputSize='lg' />
+            <Input placeholder='placeholder' variant='outline' inputSize='xl' />
+          </Flex>
+          <Flex gap={5} direction='column' isFull>
+            <Input placeholder='placeholder' variant='outline' inputSize='sm' rightElement={<Button>sdfs</Button>} />
+            <Input placeholder='placeholder' variant='outline' inputSize='md' rightElement={<Button>sdfs</Button>} />
+            <Input placeholder='placeholder' variant='outline' inputSize='lg' rightElement={<Button>sdfs</Button>} />
+            <Input placeholder='placeholder' variant='outline' inputSize='xl' rightElement={<Button>sdfs</Button>} />
+          </Flex>
+          <Flex gap={5} direction='column' isFull>
+            <Input placeholder='placeholder' variant='flushed' />
+            <Input placeholder='placeholder' variant='flushed' inputSize='sm' />
+            <Input placeholder='placeholder' variant='flushed' inputSize='md' />
+            <Input placeholder='placeholder' variant='flushed' inputSize='lg' />
+            <Input placeholder='placeholder' variant='flushed' inputSize='xl' />
+          </Flex>
+          <Flex gap={5} direction='column' isFull>
+            <Input placeholder='placeholder' variant='unstyled' />
+            <Input placeholder='placeholder' variant='unstyled' inputSize='sm' />
+            <Input placeholder='placeholder' variant='unstyled' inputSize='md' />
+            <Input placeholder='placeholder' variant='unstyled' inputSize='lg' />
+            <Input placeholder='placeholder' variant='unstyled' inputSize='xl' />
+          </Flex>
+          <Flex gap={5} direction='column' isFull>
+            <Input placeholder='placeholder' variant='unstyled' />
+            <Input placeholder='placeholder' variant='unstyled' inputSize='sm' />
+            <Input placeholder='placeholder' variant='unstyled' inputSize='md' />
+            <Input placeholder='placeholder' variant='unstyled' inputSize='lg' />
           </Flex>
         </Flex>
       </Flex>
