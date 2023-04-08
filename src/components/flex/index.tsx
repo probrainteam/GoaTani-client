@@ -6,6 +6,7 @@ interface FlexProps {
   align?: 'flex-start' | 'flex-end' | 'center' | 'stretch' | 'baseline';
   gap?: number;
   isFull?: boolean;
+  padding?: number;
 }
 
 export const Flex = styled.div<FlexProps>`
@@ -15,4 +16,5 @@ export const Flex = styled.div<FlexProps>`
   align-items: ${({ align }) => align || 'start'};
   gap: ${({ gap }) => `${gap}px` || 0};
   width: ${({ isFull }) => isFull && '100%'};
+  padding: ${({ padding }) => `${padding}px` || 0};
 `;
