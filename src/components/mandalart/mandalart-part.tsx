@@ -1,5 +1,5 @@
 import { MandalartTile } from '@/components/mandalart/mandalart-tile';
-import { MANDALART_PART_THEME, MANDALART_THEME } from '@/constants/mandalart-theme';
+import { MANDALART_PART_THEME } from '@/constants/mandalart-theme';
 import { MandalartThemeType, MandalartPartType, MandalartSizeType } from '@/types/mandalart';
 import { getFilledSubContents } from '@/utils/mandalart';
 import styled from 'styled-components';
@@ -19,7 +19,7 @@ export function MandalartPart({ contents, theme, handleItemDelete, size, order =
   const fillSubContents = getFilledSubContents(subContents);
 
   return (
-    <Wrapper bg={MANDALART_THEME[theme].bg} order={order}>
+    <Wrapper bg={MANDALART_PART_THEME[theme].bg} order={order} size={size}>
       <MandalartTile
         theme={MANDALART_PART_THEME[theme].main}
         id={mainContent.id}
@@ -47,16 +47,27 @@ export function MandalartPart({ contents, theme, handleItemDelete, size, order =
 
 const MANDALART_GAP = '5px';
 
-const Wrapper = styled.div<{ bg: string; order: number }>`
+const Wrapper = styled.div<{ bg: string; order: number; size?: MandalartSizeType }>`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 
   grid-template-rows: 1fr 1fr 1fr;
   gap: ${MANDALART_GAP};
-  border-radius: 10px;
+
   width: fit-content;
   padding: ${MANDALART_GAP};
 
   background-color: ${({ bg }) => bg};
   order: ${({ order }) => order};
+
+  ${({ size }) => {
+    if (size === 'sm') {
+      return `
+      border-radius: 4px;
+        `;
+    }
+    return `
+      border-radius: 10px;
+    `;
+  }}
 `;

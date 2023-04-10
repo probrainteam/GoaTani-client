@@ -48,21 +48,36 @@ export const MANDALART_PART_THEME: Record<
   {
     main: MandalartTileTheme;
     sub: MandalartTileTheme;
+    bg: string;
   }
 > = {
   primary: {
     main: 'primary',
     sub: 'lighten',
+    bg: theme.colors.primary[100],
   },
   secondary: {
     main: 'lighten',
     sub: 'white',
+    bg: theme.colors.lighten[300],
   },
 };
 
-export const MANDALART_SIZE: Record<MandalartSizeType, number> = {
-  sm: 45,
-  md: 90,
+export const MANDALART_FULL_THEME: Record<
+  MandalartThemeType,
+  {
+    main: MandalartThemeType;
+    sub: MandalartThemeType;
+  }
+> = {
+  primary: {
+    main: 'primary',
+    sub: 'secondary',
+  },
+  secondary: {
+    main: 'secondary',
+    sub: 'primary',
+  },
 };
 
 export const MANDALART_TEXT_SIZE: Record<MandalartSizeType, number> = {

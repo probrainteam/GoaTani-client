@@ -1,4 +1,4 @@
-import { MANDALART_SIZE, MANDALART_TEXT_SIZE, MANDALART_TILE_THEME } from '@/constants/mandalart-theme';
+import { MANDALART_TILE_THEME } from '@/constants/mandalart-theme';
 import { MandalartSizeType, MandalartTileTheme, MandalartTileType } from '@/types/mandalart';
 import styled from 'styled-components';
 
@@ -28,17 +28,30 @@ export function MandalartTile({ content, id, theme, onClick, order, size = 'md' 
 }
 
 const Wrapper = styled.div<{ bg: string; color: string; order: number; size: MandalartSizeType }>`
-  width: ${({ size }) => MANDALART_SIZE[size]}px;
-  height: ${({ size }) => MANDALART_SIZE[size]}px;
-  font-size: ${({ size }) => MANDALART_TEXT_SIZE[size]}px;
-  border-radius: 5px;
-
   display: flex;
   align-items: center;
   text-align: center;
   justify-content: center;
+  padding: 2px;
 
   background-color: ${({ bg }) => bg};
   color: ${({ color }) => color};
   order: ${({ order }) => order};
+
+  ${({ size }) => {
+    if (size === 'sm') {
+      return `
+        font-size : 10px;
+        width : 43px;
+        height : 43px;
+        border-radius : 2px;
+      `;
+    }
+    return `
+      font-size : 16px;
+      width : 90px;
+      height : 90px;
+      border-radius : 5px;
+    `;
+  }}
 `;
