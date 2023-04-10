@@ -12,9 +12,9 @@ function MandalartFull({ contents, theme }: MandalartFullProps) {
 
   return (
     <Wrapper>
-      <MandalartPart order={4} theme={theme} contents={mainContent} />
+      <MandalartPart order={4} theme={theme} contents={mainContent} size='sm' />
       {subContents.map((subContent, idx) => {
-        return <MandalartPart order={idx} theme={theme} key={'sub' + idx} contents={subContent} />;
+        return <MandalartPart order={idx} size='sm' theme={theme} key={'sub' + idx} contents={subContent} />;
       })}
     </Wrapper>
   );

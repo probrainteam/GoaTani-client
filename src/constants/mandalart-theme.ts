@@ -1,5 +1,11 @@
 import theme from '@/styles/theme';
-import { MandalartThemeType, MandalartThemeItemType } from '@/types/mandalart';
+import {
+  MandalartThemeType,
+  MandalartThemeItemType,
+  MandalartTileTheme,
+  MandalartTileThemeItemType,
+  MandalartSizeType,
+} from '@/types/mandalart';
 
 export const MANDALART_THEME: Record<MandalartThemeType, MandalartThemeItemType> = {
   primary: {
@@ -20,4 +26,46 @@ export const MANDALART_THEME: Record<MandalartThemeType, MandalartThemeItemType>
     subBgColor: theme.colors.white,
     subTextColor: theme.colors.primary[100],
   },
+};
+
+export const MANDALART_TILE_THEME: Record<MandalartTileTheme, MandalartTileThemeItemType> = {
+  primary: {
+    bg: theme.colors.primary[100],
+    text: theme.colors.white,
+  },
+  lighten: {
+    bg: theme.colors.lighten[100],
+    text: theme.colors.primary[100],
+  },
+  white: {
+    bg: theme.colors.white,
+    text: theme.colors.primary[100],
+  },
+};
+
+export const MANDALART_PART_THEME: Record<
+  MandalartThemeType,
+  {
+    main: MandalartTileTheme;
+    sub: MandalartTileTheme;
+  }
+> = {
+  primary: {
+    main: 'primary',
+    sub: 'lighten',
+  },
+  secondary: {
+    main: 'lighten',
+    sub: 'white',
+  },
+};
+
+export const MANDALART_SIZE: Record<MandalartSizeType, number> = {
+  sm: 45,
+  md: 90,
+};
+
+export const MANDALART_TEXT_SIZE: Record<MandalartSizeType, number> = {
+  sm: 10,
+  md: 16,
 };

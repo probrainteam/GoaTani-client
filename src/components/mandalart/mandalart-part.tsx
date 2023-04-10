@@ -1,18 +1,19 @@
-import { MANDALART_ITEM_SIZE, MandalartTile } from '@/components/mandalart/mandalart-tile';
-import { MANDALART_THEME } from '@/constants/mandalart-theme';
-import { MandalartThemeType, MandalartPartType } from '@/types/mandalart';
+import { MandalartTile } from '@/components/mandalart/mandalart-tile';
+import { MANDALART_PART_THEME, MANDALART_THEME } from '@/constants/mandalart-theme';
+import { MandalartThemeType, MandalartPartType, MandalartSizeType } from '@/types/mandalart';
 import { getFilledSubContents } from '@/utils/mandalart';
 import styled from 'styled-components';
 
 interface MandalartPartProps {
-  theme: MandalartThemeType;
   contents: MandalartPartType;
-  order: number;
-
   handleItemDelete?: (id: string) => void;
+
+  theme: MandalartThemeType;
+  size?: MandalartSizeType;
+  order?: number;
 }
 
-export function MandalartPart({ contents, theme, order, handleItemDelete }: MandalartPartProps) {
+export function MandalartPart({ contents, theme, handleItemDelete, size, order = 0 }: MandalartPartProps) {
   const { mainContent, subContents } = contents;
 
   const fillSubContents = getFilledSubContents(subContents);
@@ -20,22 +21,22 @@ export function MandalartPart({ contents, theme, order, handleItemDelete }: Mand
   return (
     <Wrapper bg={MANDALART_THEME[theme].bg} order={order}>
       <MandalartTile
-        bg={MANDALART_THEME[theme].mainBgColor}
-        color={MANDALART_THEME[theme].mainTextColor}
+        theme={MANDALART_PART_THEME[theme].main}
         id={mainContent.id}
         content={mainContent.content}
         order={4}
+        size={size}
       />
 
       {fillSubContents.map((subContent, idx) => {
         return (
           <MandalartTile
             key={subContent.id}
-            bg={MANDALART_THEME[theme].subBgColor}
-            color={MANDALART_THEME[theme].subTextColor}
+            theme={MANDALART_PART_THEME[theme].sub}
             id={subContent.id}
             content={subContent.content}
             onClick={handleItemDelete}
+            size={size}
             order={idx}
           />
         );
@@ -48,10 +49,10 @@ const MANDALART_GAP = '5px';
 
 const Wrapper = styled.div<{ bg: string; order: number }>`
   display: grid;
-  grid-template-columns: ${`${MANDALART_ITEM_SIZE} ${MANDALART_ITEM_SIZE} ${MANDALART_ITEM_SIZE}`};
+  grid-template-columns: 1fr 1fr 1fr;
+
   grid-template-rows: 1fr 1fr 1fr;
   gap: ${MANDALART_GAP};
-
   border-radius: 10px;
   width: fit-content;
   padding: ${MANDALART_GAP};
