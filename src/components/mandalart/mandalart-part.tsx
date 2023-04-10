@@ -4,12 +4,16 @@ import { MandalartThemeType, MandalartPartType } from '@/types/mandalart';
 import { getFilledSubContents } from '@/utils/mandalart';
 import styled from 'styled-components';
 
-interface MandalartPartProps extends MandalartPartType {
+interface MandalartPartProps {
   theme: MandalartThemeType;
+
+  contents: MandalartPartType;
   handleItemDelete?: (id: string) => void;
 }
 
-export function MandalartPart({ mainContent, subContents, theme, handleItemDelete }: MandalartPartProps) {
+export function MandalartPart({ contents, theme, handleItemDelete }: MandalartPartProps) {
+  const { mainContent, subContents } = contents;
+
   const fillSubContents = getFilledSubContents(subContents);
 
   return (

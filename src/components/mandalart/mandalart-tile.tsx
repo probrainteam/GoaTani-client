@@ -6,12 +6,12 @@ export const MANDALART_ITEM_SIZE = '90px';
 interface MandalartTileProps extends MandalartTileType {
   color: string;
   bg: string;
-  onClick?: (id: string) => void;
   order: number;
+
+  onClick?: (id: string) => void;
 }
 
 export function MandalartTile({ content, id, bg, color, onClick, order }: MandalartTileProps) {
-  console.log('order: ', order);
   return (
     <Wrapper bg={bg} color={color} order={order} onClick={() => onClick && onClick(id)}>
       {content}
