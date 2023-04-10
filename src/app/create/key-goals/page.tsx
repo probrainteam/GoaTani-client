@@ -8,11 +8,11 @@ import styled from 'styled-components';
 const DUMMY_DATA = {
   mainContent: {
     id: '0',
-    content: 'Key Objective',
+    content: 'Key Goals',
   },
 };
 
-function KeyObjectivePage() {
+function KeyGoalsPage() {
   const [subContents, setSubContents] = useState<MandalartTileType[]>([]);
   const [input, setInput] = useState('');
 
@@ -41,10 +41,7 @@ function KeyObjectivePage() {
   return (
     <Wrapper>
       <MandalartPart
-        contents={{
-          mainContent: DUMMY_DATA.mainContent,
-          subContents,
-        }}
+        contents={{ mainContent: DUMMY_DATA.mainContent, subContents }}
         theme={'secondary'}
         handleItemDelete={handleRemoveSubContent}
       />
@@ -63,4 +60,4 @@ const Wrapper = styled.div`
   gap: 20px;
 `;
 
-export default KeyObjectivePage;
+export default KeyGoalsPage;
