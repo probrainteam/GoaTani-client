@@ -7,17 +7,19 @@ interface MandalartTileProps extends MandalartTileType {
   color: string;
   bg: string;
   onClick?: (id: string) => void;
+  order: number;
 }
 
-export function MandalartTile({ content, id, bg, color, onClick }: MandalartTileProps) {
+export function MandalartTile({ content, id, bg, color, onClick, order }: MandalartTileProps) {
+  console.log('order: ', order);
   return (
-    <Wrapper bg={bg} color={color} onClick={() => onClick && onClick(id)}>
+    <Wrapper bg={bg} color={color} order={order} onClick={() => onClick && onClick(id)}>
       {content}
     </Wrapper>
   );
 }
 
-const Wrapper = styled.div<{ bg: string; color: string }>`
+const Wrapper = styled.div<{ bg: string; color: string; order: number }>`
   width: ${MANDALART_ITEM_SIZE};
   height: ${MANDALART_ITEM_SIZE};
 
@@ -30,4 +32,5 @@ const Wrapper = styled.div<{ bg: string; color: string }>`
 
   background-color: ${({ bg }) => bg};
   color: ${({ color }) => color};
+  order: ${({ order }) => order};
 `;

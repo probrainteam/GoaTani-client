@@ -1,6 +1,6 @@
 import { MandalartTile } from '@/components/mandalart/mandalart-tile';
 import { MandalartPart } from '@/components/mandalart/mandalart-part';
-import { FullMandalart } from '@/components/mandalart/full-mandalart';
 import { MandalartCarousel } from '@/components/mandalart/mandalart-carousel';
+import MandalartFull from '@/components/mandalart/mandalart-full';
 
-export { MandalartPart, FullMandalart, MandalartTile, MandalartCarousel };
+export { MandalartPart, MandalartFull, MandalartTile, MandalartCarousel };

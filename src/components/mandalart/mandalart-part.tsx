@@ -2,7 +2,6 @@ import { MANDALART_ITEM_SIZE, MandalartTile } from '@/components/mandalart/manda
 import { MANDALART_THEME } from '@/constants/mandalart-theme';
 import { MandalartThemeType, MandalartPartType } from '@/types/mandalart';
 import { getFilledSubContents } from '@/utils/mandalart';
-import { Fragment } from 'react';
 import styled from 'styled-components';
 
 interface MandalartPartProps extends MandalartPartType {
@@ -15,28 +14,15 @@ export function MandalartPart({ mainContent, subContents, theme, handleItemDelet
 
   return (
     <Wrapper bg={MANDALART_THEME[theme].bg}>
+      <MandalartTile
+        bg={MANDALART_THEME[theme].mainBgColor}
+        color={MANDALART_THEME[theme].mainTextColor}
+        id={mainContent.id}
+        content={mainContent.content}
+        order={4}
+      />
+
       {fillSubContents.map((subContent, idx) => {
-        if (idx === 4) {
-          return (
-            <Fragment key={mainContent.id}>
-              {/* 어떻게 더 잘잘 할 방법이 있을까요? */}
-              <MandalartTile
-                bg={MANDALART_THEME[theme].mainBgColor}
-                color={MANDALART_THEME[theme].mainTextColor}
-                id={mainContent.id}
-                content={mainContent.content}
-              />
-              <MandalartTile
-                bg={MANDALART_THEME[theme].subBgColor}
-                color={MANDALART_THEME[theme].subTextColor}
-                key={subContent.id}
-                id={subContent.id}
-                content={subContent.content}
-                onClick={handleItemDelete}
-              />
-            </Fragment>
-          );
-        }
         return (
           <MandalartTile
             key={subContent.id}
@@ -45,6 +31,7 @@ export function MandalartPart({ mainContent, subContents, theme, handleItemDelet
             id={subContent.id}
             content={subContent.content}
             onClick={handleItemDelete}
+            order={idx}
           />
         );
       })}
