@@ -41,8 +41,10 @@ function KeyObjectivePage() {
   return (
     <Wrapper>
       <MandalartPart
-        mainContent={DUMMY_DATA.mainContent}
-        subContents={subContents}
+        contents={{
+          mainContent: DUMMY_DATA.mainContent,
+          subContents,
+        }}
         theme={'secondary'}
         handleItemDelete={handleRemoveSubContent}
       />
