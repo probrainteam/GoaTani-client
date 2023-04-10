@@ -1,4 +1,4 @@
-import { MandalartPartType, MandalartTotalType } from '@/types/mandalart';
+import { MandalartPartType, MandalartFullType } from '@/types/mandalart';
 
 export const DUMMY_MANDALART: MandalartPartType = {
   mainContent: {
@@ -41,7 +41,7 @@ export const DUMMY_MANDALART: MandalartPartType = {
   ],
 };
 
-export const DUMMY_MANDALART_TOTAL: MandalartTotalType = {
+export const DUMMY_MANDALART_TOTAL: MandalartFullType = {
   mainContent: DUMMY_MANDALART,
   subContents: [
     DUMMY_MANDALART,

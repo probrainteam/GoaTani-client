@@ -6,9 +6,6 @@ export interface MandalartTileType {
 export interface MandalartPartType {
   mainContent: MandalartTileType;
   subContents: MandalartTileType[];
-
-  // mainColor: string; // 필요한가?
-  // subColor: string;
 }
 
 export type MandalartThemeType = 'primary' | 'secondary';
@@ -20,7 +17,7 @@ export interface MandalartThemeItemType {
   subTextColor: string;
 }
 
-export interface MandalartTotalType {
+export interface MandalartFullType {
   mainContent: MandalartPartType;
   subContents: MandalartPartType[];
 }
