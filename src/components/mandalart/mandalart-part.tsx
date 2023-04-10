@@ -11,15 +11,16 @@ interface MandalartPartProps {
   theme: MandalartThemeType;
   size?: MandalartSizeType;
   order?: number;
+  className?: string;
 }
 
-export function MandalartPart({ contents, theme, handleItemDelete, size, order = 0 }: MandalartPartProps) {
+export function MandalartPart({ contents, theme, handleItemDelete, size, order = 0, className }: MandalartPartProps) {
   const { mainContent, subContents } = contents;
 
   const fillSubContents = getFilledSubContents(subContents);
 
   return (
-    <Wrapper bg={MANDALART_PART_THEME[theme].bg} order={order} size={size}>
+    <Wrapper bg={MANDALART_PART_THEME[theme].bg} order={order} size={size} className={className}>
       <MandalartTile
         theme={MANDALART_PART_THEME[theme].main}
         id={mainContent.id}

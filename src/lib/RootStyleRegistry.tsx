@@ -30,14 +30,13 @@ export default function RootStyleRegistry({ children }: { children: React.ReactN
 const Wrapper = styled.div`
   max-width: 475px;
   margin: auto;
-
   border: 1px solid black;
-
   height: 100%;
+  overflow-x: hidden;
 `;
 
 const InnerWrapper = styled.div`
   min-height: 100vh;
-
   background-color: #fff;
+  position: relative;
 `;
