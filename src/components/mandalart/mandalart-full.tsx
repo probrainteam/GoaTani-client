@@ -1,38 +1,20 @@
 import { MandalartPart } from '@/components/mandalart/mandalart-part';
-import { MandalartPartType, MandalartThemeType } from '@/types/mandalart';
-import { Fragment } from 'react';
+import { MandalartFullType, MandalartThemeType } from '@/types/mandalart';
 import styled from 'styled-components';
 
 interface MandalartFullProps {
-  mainContent: MandalartPartType;
-  subContents: MandalartPartType[];
   theme: MandalartThemeType;
+  contents: MandalartFullType;
 }
 
-function MandalartFull({ mainContent, subContents, theme }: MandalartFullProps) {
+function MandalartFull({ contents, theme }: MandalartFullProps) {
+  const { mainContent, subContents } = contents;
+
   return (
     <Wrapper>
+      <MandalartPart order={4} theme={theme} contents={mainContent} />
       {subContents.map((subContent, idx) => {
-        if (idx === 4) {
-          return (
-            <Fragment key={idx}>
-              <MandalartPart
-                theme={theme}
-                mainContent={mainContent.mainContent}
-                subContents={mainContent.subContents}
-              />
-              <MandalartPart theme={theme} mainContent={subContent.mainContent} subContents={subContent.subContents} />
-            </Fragment>
-          );
-        }
-        return (
-          <MandalartPart
-            theme={theme}
-            key={'sub' + idx}
-            mainContent={subContent.mainContent}
-            subContents={subContent.subContents}
-          />
-        );
+        return <MandalartPart order={idx} theme={theme} key={'sub' + idx} contents={subContent} />;
       })}
     </Wrapper>
   );

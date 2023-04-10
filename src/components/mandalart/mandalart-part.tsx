@@ -6,18 +6,19 @@ import styled from 'styled-components';
 
 interface MandalartPartProps {
   theme: MandalartThemeType;
-
   contents: MandalartPartType;
+  order: number;
+
   handleItemDelete?: (id: string) => void;
 }
 
-export function MandalartPart({ contents, theme, handleItemDelete }: MandalartPartProps) {
+export function MandalartPart({ contents, theme, order, handleItemDelete }: MandalartPartProps) {
   const { mainContent, subContents } = contents;
 
   const fillSubContents = getFilledSubContents(subContents);
 
   return (
-    <Wrapper bg={MANDALART_THEME[theme].bg}>
+    <Wrapper bg={MANDALART_THEME[theme].bg} order={order}>
       <MandalartTile
         bg={MANDALART_THEME[theme].mainBgColor}
         color={MANDALART_THEME[theme].mainTextColor}
@@ -45,7 +46,7 @@ export function MandalartPart({ contents, theme, handleItemDelete }: MandalartPa
 
 const MANDALART_GAP = '5px';
 
-const Wrapper = styled.div<{ bg: string }>`
+const Wrapper = styled.div<{ bg: string; order: number }>`
   display: grid;
   grid-template-columns: ${`${MANDALART_ITEM_SIZE} ${MANDALART_ITEM_SIZE} ${MANDALART_ITEM_SIZE}`};
   grid-template-rows: 1fr 1fr 1fr;
@@ -56,4 +57,5 @@ const Wrapper = styled.div<{ bg: string }>`
   padding: ${MANDALART_GAP};
 
   background-color: ${({ bg }) => bg};
+  order: ${({ order }) => order};
 `;

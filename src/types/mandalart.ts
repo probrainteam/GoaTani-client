@@ -9,6 +9,7 @@ export interface MandalartPartType {
 }
 
 export type MandalartThemeType = 'primary' | 'secondary';
+
 export interface MandalartThemeItemType {
   bg: string;
   mainBgColor: string;
