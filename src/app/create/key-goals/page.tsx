@@ -1,5 +1,7 @@
 'use client';
 
+import Button from '@/components/button';
+import { Input } from '@/components/input';
 import { MandalartPart } from '@/components/mandalart';
 import { MandalartTileType } from '@/types/mandalart';
 import { useState } from 'react';
@@ -46,8 +48,10 @@ function KeyGoalsPage() {
         handleItemDelete={handleRemoveSubContent}
       />
       {/* 임시 */}
-      <input type='text' value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={handleInputKeyDown} />
-      <button onClick={handleAddSubContent}>추가</button>
+      <Input type='text' value={input} onChange={(e) => setInput(e.target.value)} onKeyDown={handleInputKeyDown} />
+      <Button size='xs' onClick={handleAddSubContent}>
+        추가
+      </Button>
     </Wrapper>
   );
 }
