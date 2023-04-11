@@ -5,26 +5,24 @@ function useImageDownload() {
   const captureArea = useRef<HTMLDivElement>(null);
 
   /* 다운로드 버튼 함수 */
-  const onImageDownload = () => {
+  const onImageDownload = async () => {
     if (captureArea.current) {
-      html2canvas(captureArea.current).then((canvas) => {
-        const element = document.createElement('a');
-        element.href = canvas.toDataURL('image/png');
-        element.download = '2023_Mandalart.png';
-        element.click();
-      });
+      const canvas = await html2canvas(captureArea.current);
+      const element = document.createElement('a');
+      element.href = canvas.toDataURL('image/png');
+      element.download = '2023_Mandalart.png';
+      element.click();
     }
   };
 
-  const getImageBlob = () => {
+  // 이미지 blob 형태로 가져오기, 이부분은 아직 미완성, 필요할때 완성할 예정
+  const getImageBlob = async () => {
     if (captureArea.current) {
-      html2canvas(captureArea.current).then((canvas) => {
-        canvas.toBlob((blob) => {
-          if (!blob) return;
-          const url = URL.createObjectURL(blob);
-          console.log('url: ', url);
-          return url;
-        });
+      const canvas = await html2canvas(captureArea.current);
+      canvas.toBlob((blob) => {
+        if (!blob) return;
+        const url = URL.createObjectURL(blob);
+        return url;
       });
     }
   };
