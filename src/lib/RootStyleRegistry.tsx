@@ -18,7 +18,7 @@ export default function RootStyleRegistry({ children }: { children: React.ReactN
         <Wrapper>
           <InnerWrapper>
             <Header />
-            <main>{children}</main>
+            <MainWrapper>{children}</MainWrapper>
           </InnerWrapper>
           <Footer />
         </Wrapper>
@@ -37,6 +37,9 @@ const Wrapper = styled.div`
 
 const InnerWrapper = styled.div`
   min-height: 100vh;
-  background-color: #fff;
   position: relative;
+`;
+
+const MainWrapper = styled.main`
+  padding: 0 20px;
 `;
