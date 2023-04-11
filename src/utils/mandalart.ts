@@ -10,3 +10,14 @@ export const getFilledSubContents = (subContents: MandalartTileType[]): Mandalar
     return { id: 'empty' + i, content: '' };
   });
 };
+
+export const getFilterRecommendedSubContents = (
+  recommendedContents: string[],
+  mandalartContents: MandalartTileType[],
+): string[] => {
+  const mandalartContentList = mandalartContents.map((mandalartContent) => mandalartContent.content);
+
+  return recommendedContents.filter((recommendedContent) => {
+    return !mandalartContentList.includes(recommendedContent);
+  });
+};
