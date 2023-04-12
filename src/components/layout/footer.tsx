@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-function Header() {
+function Footer() {
   return <Wrapper>team probrain</Wrapper>;
 }
 
@@ -16,4 +16,4 @@ const Wrapper = styled.footer`
   color: ${({ theme }) => theme.colors.white};
 `;
 
-export default Header;
+export default Footer;
