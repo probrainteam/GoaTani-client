@@ -20,12 +20,12 @@ const DUMMY_DATA = {
 
 const BADGE_DUMMY = ['몸 만들기', '돈 벌기', '취업', '취미', '여행', '책 읽기', '취미', '여행', '책 읽기'];
 
-function KeyGoalsPage({ initRecommendedContents = BADGE_DUMMY }: { initRecommendedContents: string[] }) {
+export default function KeyGoalsPage() {
   const router = useRouter();
 
   const [subContents, setSubContents] = useState<MandalartTileType[]>([]);
   const [input, setInput] = useState('');
-  const [recommendedContents, setRecommendedContents] = useState(initRecommendedContents);
+  const [recommendedContents, setRecommendedContents] = useState(BADGE_DUMMY);
 
   const buttonDisabled = subContents.length !== 8;
 
@@ -51,7 +51,7 @@ function KeyGoalsPage({ initRecommendedContents = BADGE_DUMMY }: { initRecommend
     setSubContents(newSubContents);
     setInput('');
 
-    setRecommendedContents(getFilterRecommendedSubContents(initRecommendedContents, newSubContents));
+    setRecommendedContents(getFilterRecommendedSubContents(BADGE_DUMMY, newSubContents));
   };
 
   const handleRemoveSubContent = (id: string) => {
@@ -156,5 +156,3 @@ const ButtonWrapper = styled.div`
 
   padding: 20px;
 `;
-
-export default KeyGoalsPage;
