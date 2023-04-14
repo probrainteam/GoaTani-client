@@ -7,6 +7,7 @@ import { Input } from '@/components/input';
 import { MandalartPart } from '@/components/mandalart';
 import { MandalartTileType } from '@/types/mandalart';
 import { getFilterRecommendedSubContents } from '@/utils/mandalart';
+import { setCreateStorage } from '@/utils/storage';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import styled from 'styled-components';
@@ -64,6 +65,11 @@ export default function KeyGoalsPage() {
     }
   };
 
+  const onNextClick = () => {
+    setCreateStorage('key-goal', subContents);
+    router.push('/create/detailed-goals');
+  };
+
   return (
     <>
       <Wrapper>
@@ -100,7 +106,7 @@ export default function KeyGoalsPage() {
         </BadgeWrapper>
       </Wrapper>
       <ButtonWrapper>
-        <Button disabled={buttonDisabled} onClick={() => router.push('/create/detailed-goals')}>
+        <Button disabled={buttonDisabled} onClick={onNextClick}>
           세부 목표 정하기
         </Button>
       </ButtonWrapper>

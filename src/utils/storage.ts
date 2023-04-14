@@ -8,14 +8,12 @@ const INIT_CREATE_STORAGE = {
   'detailed-goals': [],
 };
 
-export const setCreateStorage = (key: CreateKeyType, value: any) => {
+export const setCreateStorage = (key: CreateKeyType, value: string | any) => {
   const item = window.sessionStorage.getItem(CREATE_STORAGE_KEY);
 
   const obj = item ? JSON.parse(item) : INIT_CREATE_STORAGE;
 
-  if (key === 'full-goal') {
-    obj[key] = value;
-  }
+  obj[key] = value;
 
   window.sessionStorage.setItem(CREATE_STORAGE_KEY, JSON.stringify(obj));
 };
