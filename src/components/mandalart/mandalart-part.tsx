@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 interface MandalartPartProps {
   contents: MandalartPartType;
-  handleItemDelete?: (id: string) => void;
+  handleItemDelete?: (idx: number) => void;
 
   theme: MandalartThemeType;
   size?: MandalartSizeType;
@@ -21,22 +21,15 @@ export function MandalartPart({ contents, theme, handleItemDelete, size, order =
 
   return (
     <Wrapper bg={MANDALART_PART_THEME[theme].bg} order={order} size={size} className={className}>
-      <MandalartTile
-        theme={MANDALART_PART_THEME[theme].main}
-        id={mainContent.id}
-        content={mainContent.content}
-        order={4}
-        size={size}
-      />
+      <MandalartTile theme={MANDALART_PART_THEME[theme].main} content={mainContent} order={4} size={size} />
 
       {fillSubContents.map((subContent, idx) => {
         return (
           <MandalartTile
-            key={subContent.id}
+            key={idx}
             theme={MANDALART_PART_THEME[theme].sub}
-            id={subContent.id}
-            content={subContent.content}
-            onClick={handleItemDelete}
+            content={subContent}
+            onClick={() => handleItemDelete && handleItemDelete(idx)}
             size={size}
             order={idx}
           />

@@ -1,7 +1,4 @@
-export interface MandalartTileType {
-  id: string;
-  content: string;
-}
+export type MandalartTileType = string;
 
 export type MandalartSizeType = 'sm' | 'md';
 

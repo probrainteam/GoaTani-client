@@ -1,26 +1,25 @@
 import { MANDALART_TILE_THEME } from '@/constants/mandalart-theme';
-import { MandalartSizeType, MandalartTileTheme, MandalartTileType } from '@/types/mandalart';
+import { MandalartSizeType, MandalartTileTheme } from '@/types/mandalart';
 import styled from 'styled-components';
 
-interface MandalartTileProps extends MandalartTileType {
+interface MandalartTileProps {
+  content: string;
+
   theme: MandalartTileTheme;
-  onClick?: (id: string) => void;
+  onClick?: () => void;
 
   order: number;
   size?: MandalartSizeType;
 }
 
-export function MandalartTile({ content, id, theme, onClick, order, size = 'md' }: MandalartTileProps) {
-  const handleClick = () => {
-    onClick && onClick(id);
-  };
+export function MandalartTile({ content, theme, onClick, order, size = 'md' }: MandalartTileProps) {
   return (
     <Wrapper
       bg={MANDALART_TILE_THEME[theme].bg}
       color={MANDALART_TILE_THEME[theme].text}
       size={size}
       order={order}
-      onClick={handleClick}
+      onClick={onClick}
     >
       {content}
     </Wrapper>

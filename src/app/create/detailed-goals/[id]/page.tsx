@@ -1,7 +1,7 @@
 import React from 'react';
 
-function DetailedGoalIdPage() {
-  return <div>DetailIdPage</div>;
+function DetailedGoalsIdPage() {
+  return <div>DetailsGoalsIdPage</div>;
 }
 
-export default DetailedGoalIdPage;
+export default DetailedGoalsIdPage;
