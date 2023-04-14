@@ -3,6 +3,7 @@
 import Heading from '@/app/create/heading';
 import Button from '@/components/button';
 import { Input } from '@/components/input';
+import { setCreateStorage } from '@/utils/storage';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
@@ -32,6 +33,11 @@ function FullGoalsPage() {
     setInput(e.target.value);
   };
 
+  const nextClick = () => {
+    setCreateStorage('full-goal', input);
+    router.push('/create/key-goals');
+  };
+
   return (
     <div>
       <Heading>
@@ -50,7 +56,7 @@ function FullGoalsPage() {
         ))}
       </List>
       <ButtonWrapper>
-        <Button onClick={() => router.push('/create/key-goals')}>핵심 목표 정하기</Button>
+        <Button onClick={nextClick}>핵심 목표 정하기</Button>
       </ButtonWrapper>
     </div>
   );
