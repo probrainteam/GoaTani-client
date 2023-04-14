@@ -17,13 +17,10 @@ export function MandalartCarousel({ contents, theme, onClick }: MandalartCarouse
   const [emblaRef] = useEmblaCarousel();
   const isMounted = useMount();
 
-  // const { mainContent, subContents } = contents;
-
   return (
     <Carousel isMounted={isMounted.current}>
       <CarouselViewport ref={emblaRef}>
         <CarouselContainer gap={10}>
-          {/* <MandalartPart theme={MANDALART_FULL_THEME[theme].main} contents={mainContent} /> */}
           {contents.map((subContent, idx) => {
             return (
               <div key={'sub' + idx} onClick={() => onClick && onClick(idx)}>

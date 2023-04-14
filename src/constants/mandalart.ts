@@ -1,6 +1,6 @@
-import { MandalartPartType, MandalartFullType } from '@/types/mandalart';
+import { MandalartPartType } from '@/types/mandalart';
 
-export const DUMMY_MANDALART: MandalartPartType = {
+export const DUMMY_MANDALART = {
   mainContent: {
     id: '1',
     content: 'Key Objective',
@@ -41,7 +41,7 @@ export const DUMMY_MANDALART: MandalartPartType = {
   ],
 };
 
-export const DUMMY_MANDALART_TOTAL: MandalartFullType = {
+export const DUMMY_MANDALART_TOTAL = {
   mainContent: DUMMY_MANDALART,
   subContents: [
     DUMMY_MANDALART,
@@ -54,3 +54,19 @@ export const DUMMY_MANDALART_TOTAL: MandalartFullType = {
     DUMMY_MANDALART,
   ],
 };
+
+const INIT_CONTENT: MandalartPartType = {
+  mainContent: '',
+  subContents: [],
+};
+
+export const INIT_CONTENTS: MandalartPartType[] = [
+  INIT_CONTENT,
+  INIT_CONTENT,
+  INIT_CONTENT,
+  INIT_CONTENT,
+  INIT_CONTENT,
+  INIT_CONTENT,
+  INIT_CONTENT,
+  INIT_CONTENT,
+];

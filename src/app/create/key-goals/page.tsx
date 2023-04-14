@@ -12,14 +12,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import styled from 'styled-components';
 
-const DUMMY_DATA = {
-  mainContent: {
-    id: '0',
-    content: 'Key Goals',
-  },
-};
-
-const BADGE_DUMMY = ['몸 만들기', '돈 벌기', '취업', '취미', '여행', '책 읽기', '취미', '여행', '책 읽기'];
+const BADGE_DUMMY = ['몸 만들기', '돈 벌기', '취업', '취미', '여행', '책 읽기', '취미2', '여행2', '책 읽기2'];
 
 export default function KeyGoalsPage() {
   const router = useRouter();
@@ -32,31 +25,25 @@ export default function KeyGoalsPage() {
 
   const handleAddSubContent = () => {
     if (input === '') return;
-
-    const newSubContent = {
-      id: 'sub' + (subContents[subContents.length - 1]?.id + 1 ?? 'sub1'),
-      content: input,
-    };
-
-    setSubContents([...subContents, newSubContent]);
+    if (subContents.length === 8) return;
+    setSubContents([...subContents, input]);
     setInput('');
   };
 
   const handleBadgeClick = (content: string) => {
-    const newSubContent = {
-      id: 'sub' + (subContents[subContents.length - 1]?.id + 1 ?? 'sub1'),
-      content,
-    };
+    if (subContents.length === 8) return;
 
-    const newSubContents = [...subContents, newSubContent];
+    const newSubContents = [...subContents, content];
+
     setSubContents(newSubContents);
     setInput('');
 
     setRecommendedContents(getFilterRecommendedSubContents(BADGE_DUMMY, newSubContents));
   };
 
-  const handleRemoveSubContent = (id: string) => {
-    setSubContents(subContents.filter((subContent) => subContent.id !== id));
+  const handleRemoveSubContent = (idx: number) => {
+    const newSubContents = subContents.filter((_, i) => i !== idx);
+    setSubContents(newSubContents);
   };
 
   const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -78,7 +65,7 @@ export default function KeyGoalsPage() {
           오타니 되기 까지 20%
         </Heading>
         <MandalartPart
-          contents={{ mainContent: DUMMY_DATA.mainContent, subContents }}
+          contents={{ mainContent: 'DUMMY_DATA', subContents }}
           theme={'primary'}
           handleItemDelete={handleRemoveSubContent}
         />
