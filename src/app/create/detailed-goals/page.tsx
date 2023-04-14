@@ -40,6 +40,7 @@ const DUMMY_KEY_GOALS = [
     content: 'sadasdsadsad',
   },
 ];
+
 export default function DetailedGoalsPage() {
   const completeCount = 0;
   const router = useRouter();
