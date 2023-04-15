@@ -5,7 +5,7 @@ import Badge from '@/components/badge';
 import Button from '@/components/button';
 import { Input } from '@/components/input';
 import { MandalartPart } from '@/components/mandalart';
-import { MandalartTileType } from '@/types/mandalart';
+import useMandalart from '@/hooks/use-mandalart';
 import { getFilterRecommendedSubContents } from '@/utils/mandalart';
 import { setCreateStorage } from '@/utils/storage';
 import { useRouter } from 'next/navigation';
@@ -17,33 +17,26 @@ const BADGE_DUMMY = ['몸 만들기', '돈 벌기', '취업', '취미', '여행'
 export default function KeyGoalsPage() {
   const router = useRouter();
 
-  const [subContents, setSubContents] = useState<MandalartTileType[]>([]);
+  const { addSubContent, contents, isAllInput, removeContentIndex } = useMandalart();
   const [input, setInput] = useState('');
   const [recommendedContents, setRecommendedContents] = useState(BADGE_DUMMY);
 
-  const buttonDisabled = subContents.length !== 8;
+  const buttonDisabled = !isAllInput;
 
   const handleAddSubContent = () => {
     if (input === '') return;
-    if (subContents.length === 8) return;
-    setSubContents([...subContents, input]);
+
+    addSubContent(input);
     setInput('');
   };
 
   const handleBadgeClick = (content: string) => {
-    if (subContents.length === 8) return;
+    const addResult = addSubContent(content);
+    if (addResult) {
+      setInput('');
 
-    const newSubContents = [...subContents, content];
-
-    setSubContents(newSubContents);
-    setInput('');
-
-    setRecommendedContents(getFilterRecommendedSubContents(BADGE_DUMMY, newSubContents));
-  };
-
-  const handleRemoveSubContent = (idx: number) => {
-    const newSubContents = subContents.filter((_, i) => i !== idx);
-    setSubContents(newSubContents);
+      setRecommendedContents(getFilterRecommendedSubContents(BADGE_DUMMY, addResult));
+    }
   };
 
   const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -53,7 +46,7 @@ export default function KeyGoalsPage() {
   };
 
   const onNextClick = () => {
-    setCreateStorage('key-goal', subContents);
+    setCreateStorage('key-goal', contents);
     router.push('/create/detailed-goals');
   };
 
@@ -65,9 +58,9 @@ export default function KeyGoalsPage() {
           오타니 되기 까지 20%
         </Heading>
         <MandalartPart
-          contents={{ mainContent: 'DUMMY_DATA', subContents }}
+          contents={{ mainContent: 'DUMMY_DATA', subContents: contents }}
           theme={'primary'}
-          handleItemDelete={handleRemoveSubContent}
+          handleItemDelete={removeContentIndex}
         />
         <InputWrapper>
           <Input
@@ -78,7 +71,7 @@ export default function KeyGoalsPage() {
             inputSize='lg'
           />
           <InputButtonWrapper>
-            <Button size='xs' onClick={handleAddSubContent}>
+            <Button size='xs' onClick={handleAddSubContent} disabled={isAllInput}>
               추가
             </Button>
           </InputButtonWrapper>
@@ -109,7 +102,6 @@ const Wrapper = styled.div`
   gap: 20px;
   flex: 1;
   position: relative;
-
   padding-bottom: 100px;
 `;
 
