@@ -59,7 +59,7 @@ export default function KeyGoalsPage() {
         </Heading>
         <MandalartPart
           contents={{ mainContent: 'DUMMY_DATA', subContents: contents }}
-          theme={'primary'}
+          theme='primary'
           handleItemDelete={removeContentIndex}
         />
         <InputWrapper>
