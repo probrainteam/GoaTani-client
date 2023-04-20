@@ -5,17 +5,29 @@ import { Flex } from '@/components/flex';
 import { MandalartPart } from '@/components/mandalart/mandalart-part';
 import { MANDALART_FULL_THEME } from '@/constants/mandalart-theme';
 import { MandalartPartType, MandalartThemeType } from '@/types/mandalart';
+import { useEffect, useState } from 'react';
 
 interface MandalartCarouselProps {
   contents: MandalartPartType[];
   theme: MandalartThemeType;
 
   onClick?: (id: number) => void;
+  handleTileClick?: (partIndex: number, tileIndex: number) => void;
 }
 
-export function MandalartCarousel({ contents, theme, onClick }: MandalartCarouselProps) {
-  const [emblaRef] = useEmblaCarousel();
+export function MandalartCarousel({ contents, theme, onClick, handleTileClick }: MandalartCarouselProps) {
+  const [emblaRef, emblaApi] = useEmblaCarousel();
   const isMounted = useMount();
+  const [currentPart, setCurrentPart] = useState(0);
+
+  useEffect(() => {
+    if (emblaApi) {
+      emblaApi.on('select', () => {
+        const index = emblaApi.selectedScrollSnap();
+        setCurrentPart(index);
+      });
+    }
+  }, [emblaApi]);
 
   return (
     <Carousel isMounted={isMounted.current}>
