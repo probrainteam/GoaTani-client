@@ -5,20 +5,18 @@ import { MandalartCarousel } from '@/components/mandalart';
 import { INIT_CONTENTS } from '@/constants/mandalart';
 import { MandalartPartType } from '@/types/mandalart';
 import { getCreateStorage } from '@/utils/storage';
-import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 export default function DetailedGoalsPage() {
   const completeCount = 0;
-  const router = useRouter();
   const [contents, setContents] = useState<MandalartPartType[]>(INIT_CONTENTS);
-
-  const handleCarouselClick = (id: number) => {
-    router.push(`/create/detailed-goals/${id}`);
+  const [currentPart, setCurrentPart] = useState(0);
+  const handleTileClick = (partIndex: number, tileIndex: number) => {
+    console.log('partIndex: ', partIndex, tileIndex);
   };
 
-  useEffect(() => {
+  const init_setting = () => {
     const keyGoals = getCreateStorage('key-goal');
 
     const newContents = keyGoals.map((content: string) => ({
@@ -27,6 +25,10 @@ export default function DetailedGoalsPage() {
     }));
 
     setContents(newContents);
+  };
+
+  useEffect(() => {
+    init_setting();
   }, []);
 
   return (
@@ -36,7 +38,7 @@ export default function DetailedGoalsPage() {
         오타니 되기 까지 {60 + completeCount * 5}%
       </Heading>
 
-      <MandalartCarousel contents={contents} theme='primary' onClick={handleCarouselClick} />
+      <MandalartCarousel contents={contents} theme='primary' handleTileClick={handleTileClick} />
     </Wrapper>
   );
 }

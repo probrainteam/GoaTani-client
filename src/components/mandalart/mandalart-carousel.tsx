@@ -24,7 +24,11 @@ export function MandalartCarousel({ contents, theme, onClick }: MandalartCarouse
           {contents.map((subContent, idx) => {
             return (
               <div key={'sub' + idx} onClick={() => onClick && onClick(idx)}>
-                <MandalartPart theme={MANDALART_FULL_THEME[theme].sub} contents={subContent} />
+                <MandalartPart
+                  theme={MANDALART_FULL_THEME[theme].sub}
+                  contents={subContent}
+                  onTileClick={(tileIndex) => handleTileClick && handleTileClick(idx, tileIndex)}
+                />
               </div>
             );
           })}

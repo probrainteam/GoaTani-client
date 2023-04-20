@@ -70,7 +70,7 @@ export default function KeyGoalsPage() {
         <MandalartPart
           contents={{ mainContent, subContents: contents }}
           theme='primary'
-          handleItemDelete={removeContentIndex}
+          onTileClick={removeContentIndex}
         />
         <InputWrapper>
           <Input

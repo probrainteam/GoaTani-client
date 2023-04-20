@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 interface MandalartPartProps {
   contents: MandalartPartType;
-  handleItemDelete?: (idx: number) => void;
+  onTileClick?: (idx: number) => void;
 
   theme: MandalartThemeType;
   size?: MandalartSizeType;
@@ -14,7 +14,7 @@ interface MandalartPartProps {
   className?: string;
 }
 
-export function MandalartPart({ contents, theme, handleItemDelete, size, order = 0, className }: MandalartPartProps) {
+export function MandalartPart({ contents, theme, onTileClick, size, order = 0, className }: MandalartPartProps) {
   const { mainContent, subContents } = contents;
 
   const fillSubContents = getFilledSubContents(subContents);
@@ -29,7 +29,7 @@ export function MandalartPart({ contents, theme, handleItemDelete, size, order =
             key={idx}
             theme={MANDALART_PART_THEME[theme].sub}
             content={subContent}
-            onClick={() => handleItemDelete && handleItemDelete(idx)}
+            onClick={() => onTileClick && onTileClick(idx)}
             size={size}
             order={idx}
           />
