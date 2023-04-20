@@ -7,9 +7,9 @@ import { Input } from '@/components/input';
 import { MandalartPart } from '@/components/mandalart';
 import useMandalart from '@/hooks/use-mandalart';
 import { getFilterRecommendedSubContents } from '@/utils/mandalart';
-import { setCreateStorage } from '@/utils/storage';
+import { FULL_GOAL, KEY_GOAL, getCreateStorage, setCreateStorage } from '@/utils/storage';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const BADGE_DUMMY = ['몸 만들기', '돈 벌기', '취업', '취미', '여행', '책 읽기', '취미2', '여행2', '책 읽기2'];
@@ -21,6 +21,7 @@ export default function KeyGoalsPage() {
   const [input, setInput] = useState('');
   const [recommendedContents, setRecommendedContents] = useState(BADGE_DUMMY);
 
+  const [mainContent, setMainContent] = useState('');
   const buttonDisabled = !isAllInput;
 
   const handleAddSubContent = () => {
@@ -34,8 +35,6 @@ export default function KeyGoalsPage() {
     const addResult = addSubContent(content);
     if (addResult) {
       setInput('');
-
-      setRecommendedContents(getFilterRecommendedSubContents(BADGE_DUMMY, addResult));
     }
   };
 
@@ -46,9 +45,20 @@ export default function KeyGoalsPage() {
   };
 
   const onNextClick = () => {
-    setCreateStorage('key-goal', contents);
+    setCreateStorage(KEY_GOAL, contents);
     router.push('/create/detailed-goals');
   };
+
+  useEffect(() => {
+    const mainContent = getCreateStorage(FULL_GOAL);
+    if (mainContent) {
+      setMainContent(mainContent);
+    }
+  }, []);
+
+  useEffect(() => {
+    setRecommendedContents(getFilterRecommendedSubContents(BADGE_DUMMY, contents));
+  }, [contents]);
 
   return (
     <>
@@ -58,7 +68,7 @@ export default function KeyGoalsPage() {
           오타니 되기 까지 20%
         </Heading>
         <MandalartPart
-          contents={{ mainContent: 'DUMMY_DATA', subContents: contents }}
+          contents={{ mainContent, subContents: contents }}
           theme='primary'
           handleItemDelete={removeContentIndex}
         />

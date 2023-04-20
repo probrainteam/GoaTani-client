@@ -3,22 +3,12 @@
 import Heading from '@/app/create/heading';
 import Button from '@/components/button';
 import { Input } from '@/components/input';
-import { setCreateStorage } from '@/utils/storage';
+import { FULL_GOAL, setCreateStorage } from '@/utils/storage';
 import { useRouter } from 'next/navigation';
 import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 
-const list = [
-  '감자칩이되기',
-  '감자칩이되기',
-  '감자칩이되기',
-  '전병 먹기',
-  '전병 먹기',
-  '전병 먹기',
-  '전병민은 카톡을 읽어라',
-  '전병은 왜 카톡을 안읽냐',
-  '내 pr 확인해라',
-];
+const list = ['감자칩이되기', '감자칩이되기', '감자칩이되기', '전병 먹기', '전병 먹기', '전병 먹기'];
 
 function FullGoalsPage() {
   const router = useRouter();
@@ -34,7 +24,7 @@ function FullGoalsPage() {
   };
 
   const nextClick = () => {
-    setCreateStorage('full-goal', input);
+    setCreateStorage(FULL_GOAL, input);
     router.push('/create/key-goals');
   };
 

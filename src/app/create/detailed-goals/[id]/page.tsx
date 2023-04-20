@@ -7,7 +7,7 @@ import { Input } from '@/components/input';
 import { MandalartPart } from '@/components/mandalart';
 import useMandalart from '@/hooks/use-mandalart';
 import { getFilterRecommendedSubContents } from '@/utils/mandalart';
-import { setCreateStorage } from '@/utils/storage';
+import { DETAILED_GOAL, setCreateStorage } from '@/utils/storage';
 import { useRouter, usePathname, useSearchParams } from 'next/navigation';
 import { useState } from 'react';
 import styled from 'styled-components';
@@ -18,10 +18,6 @@ export default function DetailGoalIndexPage() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  console.log('pathname: ', pathname);
-  console.log('searchParams: ', searchParams);
-  console.log('searchParams: ', searchParams.get('id'));
-  console.log('searchParams: ', searchParams.getAll('id'));
 
   const { addSubContent, contents, isAllInput, removeContentIndex } = useMandalart();
   const [input, setInput] = useState('');
@@ -52,7 +48,7 @@ export default function DetailGoalIndexPage() {
   };
 
   const onNextClick = () => {
-    setCreateStorage('key-goal', contents);
+    setCreateStorage(DETAILED_GOAL, contents);
     router.push('/create/detailed-goals');
   };
 

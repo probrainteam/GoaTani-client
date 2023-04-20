@@ -54,7 +54,7 @@ export const MANDALART_PART_THEME: Record<
   primary: {
     main: 'primary',
     sub: 'lighten',
-    bg: theme.colors.primary[100],
+    bg: theme.colors.primary[300],
   },
   secondary: {
     main: 'lighten',
