@@ -8,12 +8,17 @@ export const DETAILED_GOAL = 'detailed-goals';
 
 type CreateKeyType = typeof KEY_GOAL | typeof FULL_GOAL | typeof DETAILED_GOAL;
 
-interface BranchesType {
+export interface BranchesType {
   title: string;
   details: string[];
 }
 
-const INIT_CREATE_STORAGE = {
+export interface CreateStorageType {
+  'full-goal': string;
+  'branches': BranchesType[];
+}
+
+const INIT_CREATE_STORAGE: CreateStorageType = {
   'full-goal': '',
   'branches': [],
 };
@@ -48,19 +53,21 @@ export const setCreateStorage = (key: CreateKeyType, value: string | any) => {
   }
 };
 
-export const getCreateStorage = (key?: string) => {
+export const getCreateStorage = (key?: string): CreateStorageType | string | string[] | null => {
   if (typeof window !== undefined) {
     const item = window.sessionStorage.getItem(CREATE_STORAGE_KEY);
     const obj = item ? JSON.parse(item) : INIT_CREATE_STORAGE;
     if (!key) return obj;
 
     if (key === FULL_GOAL) {
-      console.log('   ', obj['full-goal']);
       return obj['full-goal'];
     }
     if (key === KEY_GOAL) {
       return obj['branches'].map((item: BranchesType) => item.title);
     }
+
     return obj[key];
   }
+
+  return null;
 };

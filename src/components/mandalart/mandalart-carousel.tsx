@@ -10,10 +10,12 @@ import { useEffect } from 'react';
 interface MandalartCarouselProps {
   contents: MandalartPartType[];
   theme: MandalartThemeType;
-  handleCurrentPart: (partIndex: number) => void;
+
+  isFullMandalart?: boolean;
 
   onClick?: (id: number) => void;
   handleTileClick?: (partIndex: number, tileIndex: number) => void;
+  handleCurrentPart?: (partIndex: number) => void;
 }
 
 export function MandalartCarousel({
@@ -22,6 +24,7 @@ export function MandalartCarousel({
   onClick,
   handleTileClick,
   handleCurrentPart,
+  isFullMandalart,
 }: MandalartCarouselProps) {
   const [emblaRef, emblaApi] = useEmblaCarousel();
   const isMounted = useMount();
@@ -30,20 +33,27 @@ export function MandalartCarousel({
     if (emblaApi) {
       emblaApi.on('select', () => {
         const index = emblaApi.selectedScrollSnap();
-        handleCurrentPart(index);
+        handleCurrentPart && handleCurrentPart(index);
       });
     }
   }, [emblaApi, handleCurrentPart]);
+
+  useEffect(() => {
+    if (emblaApi) {
+      emblaApi.reInit();
+    }
+  }, [emblaApi, contents]);
 
   return (
     <Carousel isMounted={isMounted.current}>
       <CarouselViewport ref={emblaRef}>
         <CarouselContainer gap={10}>
           {contents.map((subContent, idx) => {
+            const isMainPart = idx === 0 && isFullMandalart;
             return (
               <div key={'sub' + idx} onClick={() => onClick && onClick(idx)}>
                 <MandalartPart
-                  theme={MANDALART_FULL_THEME[theme].sub}
+                  theme={isMainPart ? MANDALART_FULL_THEME[theme].main : MANDALART_FULL_THEME[theme].sub}
                   contents={subContent}
                   onTileClick={(tileIndex) => handleTileClick && handleTileClick(idx, tileIndex)}
                 />

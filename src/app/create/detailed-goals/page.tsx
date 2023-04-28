@@ -49,7 +49,7 @@ export default function DetailedGoalsPage() {
   };
 
   const init_setting = () => {
-    const keyGoals = getCreateStorage('key-goal');
+    const keyGoals = getCreateStorage('key-goal') as string[];
 
     const newContents = keyGoals.map((content: string) => ({
       mainContent: content,

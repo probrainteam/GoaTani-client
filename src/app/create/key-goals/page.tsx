@@ -50,7 +50,7 @@ export default function KeyGoalsPage() {
   };
 
   useEffect(() => {
-    const mainContent = getCreateStorage(FULL_GOAL);
+    const mainContent = getCreateStorage(FULL_GOAL) as string;
     if (mainContent) {
       setMainContent(mainContent);
     }
