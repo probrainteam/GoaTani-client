@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 
 interface TileInputProps {
-  recommendedContents: string[];
+  initRecommendedContents: string[];
 
   addSubContent: (content: string) => void | null;
   removeContentIndex: (index: number) => void;
@@ -13,9 +13,10 @@ interface TileInputProps {
   isAllInput: boolean;
 }
 
-function TileInput({ recommendedContents, addSubContent, isAllInput }: TileInputProps) {
+function TileInput({ initRecommendedContents, addSubContent, contents, isAllInput }: TileInputProps) {
   const [input, setInput] = useState('');
-
+  // const [recommendedContents, setRecommendedContents] = useState<string[]>([]);
+  const recommendedContents = initRecommendedContents.filter((content) => !contents.includes(content)) ?? [];
   const handleAddSubContent = () => {
     if (input === '') return;
 
@@ -37,7 +38,7 @@ function TileInput({ recommendedContents, addSubContent, isAllInput }: TileInput
   };
 
   return (
-    <div>
+    <>
       <InputWrapper>
         <Input
           type='text'
@@ -59,7 +60,7 @@ function TileInput({ recommendedContents, addSubContent, isAllInput }: TileInput
           </Badge>
         ))}
       </BadgeWrapper>
-    </div>
+    </>
   );
 }
 

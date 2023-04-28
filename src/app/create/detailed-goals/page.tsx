@@ -18,13 +18,12 @@ export default function DetailedGoalsPage() {
   const [currentPart, setCurrentPart] = useState(0);
 
   const isCurrentPartPullSelect = contents[currentPart].subContents.length === 8;
+  const currentPartContents = contents[currentPart].subContents;
 
-  const { addSubContent, contents: tileContents, isAllInput, removeContentIndex } = useMandalart();
+  const { removeContentIndex } = useMandalart();
 
   const handleTileClick = (partIndex: number, tileIndex: number) => {
     if (partIndex !== currentPart) return;
-
-    console.log('partIndex: ', partIndex, tileIndex);
   };
 
   const handleTileContentAdd = (content: string) => {
@@ -64,9 +63,9 @@ export default function DetailedGoalsPage() {
       />
 
       <TileInput
-        recommendedContents={BADGE_DUMMY}
+        initRecommendedContents={BADGE_DUMMY}
         addSubContent={handleTileContentAdd}
-        contents={tileContents}
+        contents={currentPartContents}
         isAllInput={isCurrentPartPullSelect}
         removeContentIndex={removeContentIndex}
       />
