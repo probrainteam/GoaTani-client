@@ -12,7 +12,10 @@ export default function DetailedGoalsPage() {
   const completeCount = 0;
   const [contents, setContents] = useState<MandalartPartType[]>(INIT_CONTENTS);
   const [currentPart, setCurrentPart] = useState(0);
+
   const handleTileClick = (partIndex: number, tileIndex: number) => {
+    if (partIndex !== currentPart) return;
+
     console.log('partIndex: ', partIndex, tileIndex);
   };
 
@@ -38,7 +41,12 @@ export default function DetailedGoalsPage() {
         오타니 되기 까지 {60 + completeCount * 5}%
       </Heading>
 
-      <MandalartCarousel contents={contents} theme='primary' handleTileClick={handleTileClick} />
+      <MandalartCarousel
+        contents={contents}
+        theme='primary'
+        handleTileClick={handleTileClick}
+        handleCurrentPart={(partIndex) => setCurrentPart(partIndex)}
+      />
     </Wrapper>
   );
 }
