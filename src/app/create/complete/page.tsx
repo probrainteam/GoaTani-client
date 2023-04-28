@@ -2,13 +2,17 @@
 
 import Button from '@/components/button';
 import { MandalartCarousel } from '@/components/mandalart';
+import { CREATE_POSTING_PATH } from '@/constants/path';
 import useDidMount from '@/hooks/use-did-mount';
 import { MandalartPartType } from '@/types/mandalart';
 import { BranchesType, CreateStorageType, getCreateStorage } from '@/utils/storage';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import styled from 'styled-components';
 
 function CreateCompletePage() {
+  const router = useRouter();
+
   const [contents, setContents] = useState<MandalartPartType[]>([]);
 
   const fullGoal = contents.length > 0 && contents[0].mainContent;
@@ -38,7 +42,7 @@ function CreateCompletePage() {
       <MandalartCarousel contents={contents} theme='primary' isFullMandalart />
 
       <ButtonWrapper>
-        <Button>피드에 공유하기</Button>
+        <Button onClick={() => router.push(CREATE_POSTING_PATH)}>피드에 공유하기</Button>
 
         <Button variant='outline'>다운로드</Button>
       </ButtonWrapper>
@@ -65,8 +69,10 @@ const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 45px;
-  gap: 6px;
+  gap: 10px;
+
+  max-width: 400px;
+  margin: 45px auto;
 `;
 
 export default CreateCompletePage;
