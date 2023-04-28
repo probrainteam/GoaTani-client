@@ -1,4 +1,4 @@
-import { MandalartTileType } from '@/types/mandalart';
+import { MandalartPartType, MandalartTileType } from '@/types/mandalart';
 
 const CREATE_STORAGE_KEY = 'goatani';
 
@@ -37,6 +37,11 @@ export const setCreateStorage = (key: CreateKeyType, value: string | any) => {
     }
 
     if (key === DETAILED_GOAL) {
+      const newDetailedGoalObj = value.map((item: MandalartPartType, index: number) => ({
+        title: item.mainContent,
+        details: item.subContents,
+      }));
+      obj['branches'] = newDetailedGoalObj;
     }
 
     window.sessionStorage.setItem(CREATE_STORAGE_KEY, JSON.stringify(obj));
@@ -49,7 +54,6 @@ export const getCreateStorage = (key?: string) => {
     const obj = item ? JSON.parse(item) : INIT_CREATE_STORAGE;
     if (!key) return obj;
 
-    console.log('key: ', key);
     if (key === FULL_GOAL) {
       console.log('   ', obj['full-goal']);
       return obj['full-goal'];

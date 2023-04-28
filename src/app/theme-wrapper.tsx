@@ -36,4 +36,5 @@ const InnerWrapper = styled.div`
 
 const MainWrapper = styled.main`
   padding: 0 20px;
+  height: calc(100vh - 59px);
 `;
