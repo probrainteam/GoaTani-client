@@ -7,16 +7,17 @@ import styled from 'styled-components';
 interface TileInputProps {
   initRecommendedContents: string[];
 
-  addSubContent: (content: string) => void | null;
-  removeContentIndex: (index: number) => void;
   contents: string[];
-  isAllInput: boolean;
+  isInputDisabled: boolean;
+
+  addSubContent: (content: string) => void | null;
 }
 
-function TileInput({ initRecommendedContents, addSubContent, contents, isAllInput }: TileInputProps) {
+function TileInput({ initRecommendedContents, addSubContent, contents, isInputDisabled }: TileInputProps) {
   const [input, setInput] = useState('');
-  // const [recommendedContents, setRecommendedContents] = useState<string[]>([]);
+
   const recommendedContents = initRecommendedContents.filter((content) => !contents.includes(content)) ?? [];
+
   const handleAddSubContent = () => {
     if (input === '') return;
 
@@ -26,6 +27,7 @@ function TileInput({ initRecommendedContents, addSubContent, contents, isAllInpu
 
   const handleBadgeClick = (content: string) => {
     const addResult = addSubContent(content);
+
     if (addResult) {
       setInput('');
     }
@@ -48,7 +50,7 @@ function TileInput({ initRecommendedContents, addSubContent, contents, isAllInpu
           inputSize='lg'
         />
         <InputButtonWrapper>
-          <Button size='xs' onClick={handleAddSubContent} disabled={isAllInput}>
+          <Button size='xs' onClick={handleAddSubContent} disabled={isInputDisabled}>
             추가
           </Button>
         </InputButtonWrapper>

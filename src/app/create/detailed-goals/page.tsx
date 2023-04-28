@@ -5,7 +5,6 @@ import Heading from '@/app/create/heading';
 import { MandalartCarousel } from '@/components/mandalart';
 import { INIT_CONTENTS } from '@/constants/mandalart';
 import useDidMount from '@/hooks/use-did-mount';
-import useMandalart from '@/hooks/use-mandalart';
 import { MandalartPartType } from '@/types/mandalart';
 import { getCreateStorage } from '@/utils/storage';
 import { useState } from 'react';
@@ -20,13 +19,18 @@ export default function DetailedGoalsPage() {
   const isCurrentPartPullSelect = contents[currentPart].subContents.length === 8;
   const currentPartContents = contents[currentPart].subContents;
 
-  const { removeContentIndex } = useMandalart();
+  const handleRemoveTileContent = (partIndex: number, tileIndex: number) => {
+    const newContents = [...contents];
+    newContents[currentPart].subContents.splice(tileIndex, 1);
+    setContents(newContents);
+  };
 
   const handleTileClick = (partIndex: number, tileIndex: number) => {
     if (partIndex !== currentPart) return;
+    handleRemoveTileContent(partIndex, tileIndex);
   };
 
-  const handleTileContentAdd = (content: string) => {
+  const handleAddTileContent = (content: string) => {
     const newContents = [...contents];
     newContents[currentPart].subContents.push(content);
 
@@ -64,10 +68,9 @@ export default function DetailedGoalsPage() {
 
       <TileInput
         initRecommendedContents={BADGE_DUMMY}
-        addSubContent={handleTileContentAdd}
+        addSubContent={handleAddTileContent}
         contents={currentPartContents}
-        isAllInput={isCurrentPartPullSelect}
-        removeContentIndex={removeContentIndex}
+        isInputDisabled={isCurrentPartPullSelect}
       />
     </Wrapper>
   );
