@@ -1,22 +1,37 @@
 'use client';
 
+import TileInput from '@/app/create/detailed-goals/input';
 import Heading from '@/app/create/heading';
 import { MandalartCarousel } from '@/components/mandalart';
 import { INIT_CONTENTS } from '@/constants/mandalart';
+import useDidMount from '@/hooks/use-did-mount';
+import useMandalart from '@/hooks/use-mandalart';
 import { MandalartPartType } from '@/types/mandalart';
 import { getCreateStorage } from '@/utils/storage';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
+const BADGE_DUMMY = ['몸 만들기', '돈 벌기', '취업', '취미', '여행', '책 읽기', '취미2', '여행2', '책 읽기2'];
 
 export default function DetailedGoalsPage() {
   const completeCount = 0;
   const [contents, setContents] = useState<MandalartPartType[]>(INIT_CONTENTS);
   const [currentPart, setCurrentPart] = useState(0);
 
+  const isCurrentPartPullSelect = contents[currentPart].subContents.length === 8;
+
+  const { addSubContent, contents: tileContents, isAllInput, removeContentIndex } = useMandalart();
+
   const handleTileClick = (partIndex: number, tileIndex: number) => {
     if (partIndex !== currentPart) return;
 
     console.log('partIndex: ', partIndex, tileIndex);
+  };
+
+  const handleTileContentAdd = (content: string) => {
+    const newContents = [...contents];
+    newContents[currentPart].subContents.push(content);
+
+    setContents(newContents);
   };
 
   const init_setting = () => {
@@ -30,9 +45,9 @@ export default function DetailedGoalsPage() {
     setContents(newContents);
   };
 
-  useEffect(() => {
+  useDidMount(() => {
     init_setting();
-  }, []);
+  });
 
   return (
     <Wrapper>
@@ -46,6 +61,14 @@ export default function DetailedGoalsPage() {
         theme='primary'
         handleTileClick={handleTileClick}
         handleCurrentPart={(partIndex) => setCurrentPart(partIndex)}
+      />
+
+      <TileInput
+        recommendedContents={BADGE_DUMMY}
+        addSubContent={handleTileContentAdd}
+        contents={tileContents}
+        isAllInput={isCurrentPartPullSelect}
+        removeContentIndex={removeContentIndex}
       />
     </Wrapper>
   );
